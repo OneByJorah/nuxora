@@ -17,7 +17,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: jorahone/jnop-backend:latest
+    image: ghcr.io/onebyjorah/nuxora-backend:latest
     container_name: jnop-backend
     restart: unless-stopped
     volumes:
@@ -52,7 +52,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    image: jorahone/jnop-frontend:latest
+    image: ghcr.io/onebyjorah/nuxora-frontend:latest
     container_name: jnop-frontend
     restart: unless-stopped
     networks:
@@ -165,6 +165,7 @@ services:
 
   crowdsec:
     image: crowdsecurity/crowdsec:v1.7.8
+    profiles: ["security"]
     container_name: jnop-crowdsec
     restart: unless-stopped
     dns:
