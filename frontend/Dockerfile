@@ -8,7 +8,8 @@ WORKDIR /app
 
 # Copy dependency manifests
 COPY package.json package-lock.json ./
-RUN npm ci --include=dev
+# npm 10 crashes resolving vite 8's optional peer chain (arborist edgesOut bug)
+RUN npm install -g npm@^11 && npm ci --include=dev
 
 # Copy source and build
 COPY . .
