@@ -24,6 +24,9 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# non-root: move pid + cache under writable paths in the main config
+RUN sed -i 's|^pid.*|pid /tmp/nginx.pid;|; s|/var/cache/nginx|/tmp/nginx_cache|g' /etc/nginx/nginx.conf && mkdir -p /tmp/nginx_cache && chown -R 1001:1001 /tmp/nginx_cache
+
 # Create non-root user for nginx
 RUN addgroup --system --gid 1001 jnop && \
     adduser --system --uid 1001 --ingroup jnop --no-create-home jnop && \
