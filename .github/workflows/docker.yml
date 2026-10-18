@@ -15,3 +15,6 @@ permissions:
 jobs:
   publish:
     uses: ./.github/workflows/reusable-docker.yml
+    with:
+      context: ./frontend
+      dockerfile: frontend/Dockerfile
