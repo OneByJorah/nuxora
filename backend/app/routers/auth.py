@@ -1,9 +1,9 @@
 from datetime import UTC, datetime, timedelta
 
 import bcrypt
+import jwt
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError, jwt
 from pydantic import BaseModel, EmailStr
 
 from ..config import get_settings
@@ -74,7 +74,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
-    except JWTError as err:
+    except jwt.PyJWTError as err:
         raise credentials_exception from err
 
     db = SessionLocal()
