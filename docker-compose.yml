@@ -102,7 +102,7 @@ services:
     networks:
       - internal
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD:-nuxora-demo} ping | grep PONG || true"]
+      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD:-nuxora-demo} ping | grep -q PONG"]
       interval: 10s
       timeout: 3s
       retries: 3
