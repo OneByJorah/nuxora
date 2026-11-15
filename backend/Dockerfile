@@ -24,6 +24,7 @@ WORKDIR /app
 # Runtime dependencies only
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
+    zlib1g \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy installed packages from builder
